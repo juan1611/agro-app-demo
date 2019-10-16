@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}">Insert title here</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<h1
+			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
+			th:text="${titulo}" name="titulo"></h1>
+		<p>
+			<a th:href="@{/producto/productoForm}" name="crearProducto" class="btn btn-success btn-xs">Crear Producto</a>
+		</p>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>nombreProducto</th>
+					<th>descripcion</th>
+					<th>tipo</th>
+					<th>precioKilo</th>
+					<th>precioUnidad</th>
+					<th>ubicacion</th>
+					<th>vendedor</th>
+					<th>estado</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="producto: ${productos}">
+					<td th:text="${producto.id}" th:name="${producto.id}"></td>
+					<td th:text="${producto.nombreProducto}"></td>
+					<td th:text="${producto.descripcion}"></td>
+					<td th:text="${producto.tipo}"></td>
+					<td th:text="${producto.precioKilo}"></td>
+					<td th:text="${producto.precioUnidad}"></td>
+					<td th:text="${producto.ubicacion}"></td>
+					<td th:text="${producto.vendedor}"></td>
+					<td th:text="${producto.estado}"></td>
+					<td><a class="btn btn-primary btn-xs"
+						th:href="@{/producto/productoForm/} + ${producto.id}" th:text="'editar'"></a></td>
+					<td><a class="btn btn-danger btn-xs"
+						th:href="@{/producto/productoEliminar/} + ${producto.id}" th:text="'eliminar'"
+						onclick="return confirm('Estás seguro que quieres eliminar?');"></a></td>
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
